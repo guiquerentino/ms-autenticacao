@@ -23,7 +23,7 @@ public class AutenticacaoController {
 
 	@PostMapping(path = "/autenticacao")
 	public ResponseEntity<?> enviaEmailAutenticacao(@RequestBody Data data) {
-		
+
 		ResponseToken token = new ResponseToken();
 
 		Integer numero = 0;
@@ -32,16 +32,14 @@ public class AutenticacaoController {
 		while (numero < 1000) {
 			numero = gerador.nextInt(9999);
 		}
-		
+
 		String numeroString = numero.toString();
-		
-		
+
 		token.setTokenCode(numeroString);
-		
 
 		service.sendEmail(numeroString, data.getDestinatarioNome());
 
-		return new ResponseEntity<>(token,HttpStatus.OK);
+		return new ResponseEntity<>(token, HttpStatus.OK);
 
 	}
 
