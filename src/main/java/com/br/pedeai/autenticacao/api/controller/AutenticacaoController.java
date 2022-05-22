@@ -13,28 +13,27 @@ import com.br.pedeai.autenticacao.api.service.EmailService;
 @RestController
 @RequestMapping(path = "/api/login/")
 public class AutenticacaoController {
-	
+
 	@Autowired
 	private EmailService service;
-	
+
 	@PostMapping(path = "/autenticacao")
 	public String enviaEmailAutenticacao(@RequestBody String destinatario) {
-		
-		System.out.println(destinatario);
-		
+
+		Integer numero = 0;
 		Random gerador = new Random();
-		Integer numero = gerador.nextInt(9999);
-		String numeroString = numero.toString();
+
+		while (numero < 1000) {
+			
+			numero = gerador.nextInt(9999);
+		}
 		
-		//service.enviaEmail(numeroString, destinatario);
+		String numeroString = numero.toString();
+
 		service.sendEmail(numeroString, destinatario);
 
-		
 		return numeroString;
-		//Recebe requisição (GET) (OK)
-		//Gera número aleatório (OK)
-		//Envia e-mail com número aleatório (OK)
-		
+
 	}
 
 }
